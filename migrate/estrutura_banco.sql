@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS dev_burguer;
 use dev_burguer;
 
-CREATE TABLE hamburguer (
+CREATE TABLE produtos (
 	codigo INT AUTO_INCREMENT PRIMARY KEY,
     produto VARCHAR(200),
     descricao VARCHAR(200),
