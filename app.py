@@ -17,9 +17,9 @@ def pagina_principal():
 @app.route("/pagina2/<codigo>")
 def pagina_pagina2(codigo):
 
-    recuperar_produto = capturando_produto(codigo)
+    rcp = capturando_produto(codigo)
 
-    return render_template("pagina2.html", recuperar_produtoproduto = recuperar_produto)
+    return render_template("pagina2.html", rcp = rcp)
 
 
 if __name__=="__main__":

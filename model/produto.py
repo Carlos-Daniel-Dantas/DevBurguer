@@ -28,22 +28,7 @@ def capturando_produto(codigo: int):
 
     conexao, cursor = conectar()
 
-    cursor.execute("""
-                   SELECT " \
-                    "codigo, " \
-                    "produto, " \
-                    "descricao, " \
-                    "preco, " \
-                    "destaque, " \
-                    "foto, " \
-                    "disponibilidade " \
-                    "FROM produtos " \
-                    "WHERE codigo = %s;
-                   """,
-                   
-                   [codigo])
-
-
+    cursor.execute("SELECT codigo, produto, descricao, preco, destaque, foto, disponibilidade from produtos WHERE codigo = %s",[codigo])
 
     produto = cursor.fetchone()
 

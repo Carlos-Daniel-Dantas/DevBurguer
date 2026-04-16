@@ -5,16 +5,15 @@
     <main class="product-page">
         <div class="product-visual">
             <span class="badge">🔥 Mais Pedido</span>
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800" alt="Burger">
+            <img src="{{ rcp.foto }}" alt="Burger">
             <script></script>
             <div class="extra-box" style="margin-top: 30px;">
                 <span class="extra-title">Informações Nutricionais</span>
                 <p style="font-size: 0.85rem; color: #777;">Calorias: 850kcal | Proteínas: 45g | Carboidratos: 38g</p>
             </div>
         </div>
-
         <div class="product-info">
-            <h1>Classic Dev Burger</h1>
+            <h1>{{ rcp.produto }}</h1>
             <div class="stars">
                 <span class="material-symbols-outlined" style="font-size: 18px; fill: 1;">star</span>
                 <span class="material-symbols-outlined" style="font-size: 18px; fill: 1;">star</span>
@@ -24,7 +23,7 @@
                 <span style="color: #888; font-size: 0.9rem;">(120+ avaliações)</span>
             </div>
 
-            <p class="price-tag">R$ 25,00</p>
+            <p class="price-tag">R$ {{rcp.preco}}</p>
 
             <div class="qty-selector">
                 <span>Quantidade:</span>
@@ -58,7 +57,7 @@
                 <span class="material-symbols-outlined" style="font-size: 12px;">timer</span> 
                 Entrega estimada: 30-45 min
             </p>
-        </div>
+        </div>   
     </main>
 {% endblock %}
 </body>
