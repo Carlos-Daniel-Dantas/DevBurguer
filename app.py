@@ -45,17 +45,6 @@ def pagina_login():
         session["usuario_logado"] = resultado
         return redirect()
     
-@app.route('/carrinho')
-def ver_carrinho():
-    # Pega a lista de produtos da sessão, ou uma lista vazia se não houver nada
-    itens = session.get('carrinho', [])
-    
-    # Calcula o total (convertendo para float se necessário)
-    total = sum(float(str(item['preco']).replace(',', '.')) for item in itens)
-    
-    return render_template('carrinho.html', carrinho=itens, total=f"{total:.2f}".replace('.', ','))
-
-
 
 if __name__=="__main__":
     app.run(debug=True)
