@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, session
-from model.produto import capturando_produtos, capturando_destaques, capturando_produto 
+from flask import Flask, render_template, request, redirect, session, jsonify
+from model.produto import capturando_produtos, capturando_destaques, capturando_produto
+from model.carrinho import  recuperar_carrinho
 from model.usuarios import Usuarios
 
 app = Flask(__name__)
@@ -21,32 +22,53 @@ def pagina_pagina2(codigo):
 
     return render_template("pagina2.html", rcp = rcp)
 
-@app.route("/cadastrar", methods=["GET"])
-def cadastrar():
-    
-    usuario = request.form.get("usuario")
-    senha = request.form.get("senha")
-    nome = request.form.get ("nome")
+# //======================= LOGIN E CADASTRO FUNÇÕES =========================
 
-    novo_usuario = Usuarios(usuario, senha, nome)
-    novo_usuario.cadastrar()
+@app.route("/cadastrar", methods=["POST"])
+def cadastrar():
+    try:
+        usuario = request.form.get("usuario")
+        senha = request.form.get("senha")
+        nome = request.form.get ("nome")
+
+        novo_usuario = Usuarios(usuario, senha, nome)
+        if Usuarios.cadastrar(novo_usuario):
+            return redirect('/')
+    except Exception as erro:
+        return False
+
+@app.route("/cadastro", methods=["GET"])
+def entrar_cadastro():
 
     return render_template("/login.html")
 
 @app.route("/login/usuario", methods=["POST"])
 def pagina_login():
-    usuario = request.form.get("usuario")
-    senha = request.form.get("senha")
+    try:
+        usuario = request.form.get("nome")
+        senha = request.form.get("senha")
 
-    resultado = usuario.logar(usuario, senha)
-    return render_template("login.html")
+        resultado = Usuarios.logar(usuario, senha)
 
-    if not resultado:
         session["usuario_logado"] = resultado
-        return redirect()
-    
-    
-    
+        return redirect("/")
+    except Exception as erro:
+        print(erro)
+        return False
+
+# //===========================================================================
+
+@app.route("/api/get/carrinho", methods=["GET"] )
+def api_get_carrinho():
+    if "usuario_logado" in session:
+        usuario = session["usuario_logado"]["usuario"]
+        carrinho = recuperar_carrinho(usuario)
+        return jsonify(carrinho), 200
+    else:
+        return jsonify({"message":"Usuário não logado"}), 401
+
+
+
 
 if __name__=="__main__":
     app.run(debug=True)

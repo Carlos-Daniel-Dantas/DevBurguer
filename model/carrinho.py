@@ -6,7 +6,7 @@ def recuperar_carrinho( usuario:str )-> list:
 
     cursor.execute("""
                     select carrinhos.cod_carrinho,
-                        usuarios.usuario,
+                        carrinhos.usuario,
                         carrinhos.data,
                         carrinhos.finalizado,
                         produtos.produto,
@@ -15,8 +15,9 @@ def recuperar_carrinho( usuario:str )-> list:
                         produtos.foto
                     From carrinhos
                     inner join itens_carrinho on carrinhos.cod_carrinho = itens_carrinho.cod_carrinho
-                    inner join  produtos on produto.codigo = itens_carrinho.cod_produto
-                   """)
+                    inner join  produtos on produtos.codigo = itens_carrinho.cod_produto
+                   WHERE carrinhos.usuario = %s;
+                   """, [usuario])
 
     produto = cursor.fetchall()
 

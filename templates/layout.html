@@ -142,6 +142,7 @@
                 <li class="header__item"><a href="#menu" class="header__link">Cardápio</a></li>
                 <li class="header__item"><a href="#" class="header__link">Sobre</a></li>
                 <li class="header__item"><a href="#" class="header__link">Contato</a></li>
+                {{session["usuario_logado"]}}
             </ul>
         </nav>
 
@@ -195,17 +196,6 @@
                 {% endfor %}
             </ul>
         {% else %}
-        
-            <ul class="carrinho">
-                <li>
-                    <span>X-Burger Especial</span>
-                    <strong>R$ 25,00</strong>
-                </li>
-                <li>
-                    <span>Batata Frita G</span>
-                    <strong>R$ 15,00</strong>
-                </li>
-            </ul>
 
         {% endif %}
     </div>

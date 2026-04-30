@@ -1,5 +1,5 @@
-function mostrar_carrinho() {
-    const reesposta = await fetch("http://10.110.134.2:8080/api/get/carrinho")
+ async function mostrar_carrinho() {
+    const reesposta = await fetch("/api/get/carrinho")
 
     if (reesposta.ok) {
         alert("ERRO AO CARREGAR CARRINHO!")

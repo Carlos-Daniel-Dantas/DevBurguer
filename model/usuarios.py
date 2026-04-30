@@ -6,12 +6,16 @@ class Usuarios():
         self.senha = senha
         self.nome = nome
 
+    # //======================= LOGIN E CADASTRO FUNÇÕES =========================
+
     def cadastrar(self):
         conexao, cursor = conectar()
         cursor.execute("""
-                        INSERT INTO usuarios (usuario, senha, nome)
-                       VALUES (%s, %s, %s);
-                        """, [self.usuario, self.senha, self.nome])
+                        INSERT INTO usuarios(usuario, senha, nome)
+                        VALUES (%s, %s, %s);
+                        """, 
+                        [self.usuario, self.nome, self.senha]
+                      )
         conexao.commit()
         conexao.close()
 
@@ -20,13 +24,15 @@ class Usuarios():
 
         conexao, cursor = conectar()
         cursor.execute("""
-                        select * from usuarios WHERE usuario = %s AND senha = $s
+                        select * from usuarios WHERE usuario = %s AND senha = %s
                        """,
                        (usuario, senha))
         resultado = cursor.fetchone()
         conexao.close()
 
         return resultado
+    
+    # //======================================================================
 
     def verificar_usuario(usuario, senha):
         try:
