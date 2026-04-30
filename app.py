@@ -45,6 +45,8 @@ def pagina_login():
         session["usuario_logado"] = resultado
         return redirect()
     
+    
+    
 
 if __name__=="__main__":
     app.run(debug=True)
