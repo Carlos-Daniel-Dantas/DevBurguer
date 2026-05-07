@@ -24,3 +24,39 @@ def recuperar_carrinho( usuario:str )-> list:
     conexao.close()
 
     return produto
+
+def inserir_item(usuario,  cod_produto, quantidade=1):
+
+    conexao, cursor = conectar()
+
+    cursor.execute("""SELECT cod_carrinho FROM carrinhos
+                   where usuario = %s
+                   AND finalizado = 0
+                   limit 1;
+                   
+                   """, [usuario])
+
+    resultado_carrinho = cursor.fetchone()
+
+    if resultado_carrinho:
+        cod_carrinho = resultado_carrinho["cod_carrinho"]
+    else:
+        cursor.execute("""
+                        insert into carrinhos (usuario)
+                        values (%s)
+
+                        """, [usuario])
+    
+    codigo_carrinho = cursor.lastrowid
+
+    cursor.execute("""
+                    insert into itens_carrinho
+                        (cod_carrinho, cod_produto, quantidade)
+                    values
+                        (%s, %s, %s)
+                    """,
+                    [cod_carrinho, cod_produto, quantidade])
+
+    conexao.close()
+
+    return resultado_carrinho

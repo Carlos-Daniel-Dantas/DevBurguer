@@ -55,7 +55,7 @@
               alt="{{ destaque.produto }}"
               class="category-item__img"
             />
-            <a href="/detalhes_produto/{{ destaque.codigo }}" class="button button--small">EU QUERO</a>
+            <button onclick="inserirItemCariinho({{destaque.codigo}})" href="/detalhes_produto/{{ destaque.codigo }}" class="button button--small">EU QUERO</button>
           </div>
           {% endfor %}
           </div>
