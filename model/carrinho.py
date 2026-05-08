@@ -37,6 +37,7 @@ def inserir_item(usuario,  cod_produto, quantidade=1):
                    """, [usuario])
 
     resultado_carrinho = cursor.fetchone()
+    print(resultado_carrinho)
 
     if resultado_carrinho:
         cod_carrinho = resultado_carrinho["cod_carrinho"]
@@ -47,7 +48,7 @@ def inserir_item(usuario,  cod_produto, quantidade=1):
 
                         """, [usuario])
     
-    codigo_carrinho = cursor.lastrowid
+        cod_carrinho = cursor.lastrowid
 
     cursor.execute("""
                     insert into itens_carrinho
@@ -57,6 +58,7 @@ def inserir_item(usuario,  cod_produto, quantidade=1):
                     """,
                     [cod_carrinho, cod_produto, quantidade])
 
+    conexao.commit()
     conexao.close()
 
     return resultado_carrinho

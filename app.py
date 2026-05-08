@@ -81,7 +81,6 @@ def api_inserir_carrinho():
     else:
         return redirect("/cadastro")
         
-
-
+        
 if __name__=="__main__":
     app.run(debug=True)
